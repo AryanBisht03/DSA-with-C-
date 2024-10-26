@@ -1,0 +1,110 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Stack
+{
+  int max_size;
+  int top;
+  int *arr;
+  
+  public:
+   Stack(int size)
+   {
+   	max_size=size;
+   	arr=new int[max_size];
+   	top=-1;
+   }
+   
+   ~Stack()
+   {
+   	delete[] arr;
+   }
+   
+   void push(int element)
+   {
+    	if(top>=max_size-1)
+    	cout<<"Stack is full"<<endl;
+    	else
+    	{
+    		arr[++top]=element;
+    		cout<<element<<" is pushed into the stack"<<endl;
+		}
+   }
+   int pop()
+   {
+   	if(top<0)
+   	return -1;
+   	else
+   	{
+   		return arr[top--];
+	   }
+	   }	
+	   
+	void peak()
+	{
+		if(top<0)
+		cout<<"Stack is empty"<<endl;
+		else
+		{
+			cout<<"Top element is "<<arr[top]<<endl;
+		}
+	}
+	void display()
+	{
+		if(top<0)
+		{
+			cout<<"Stack is empty"<<endl;
+		}
+		else
+		{
+			for(int i=top;i>=0;i--)
+		{
+			cout<<arr[i]<<" ";
+		}
+		cout<<endl;
+		}
+		
+	}
+	bool isEmpty()
+	{
+		return (top<0);
+	}
+};
+
+void decimal_to_binary(int decimal)
+{
+	//givin the size of the stack staticly and bigger
+	Stack stack(32);
+	
+	//the main logic...dividing the number by 2 and pushing the
+	//remainder into stack, till it is full
+	while(decimal>0)
+	{
+		int remainder=decimal%2;
+		stack.push(remainder);
+		decimal=decimal/2;
+	}
+	
+	//now printing the binary represenetaion by popping out 
+	//the elements
+	cout<<"Binary representation is ";
+	while(!stack.isEmpty())
+	{
+		cout<<stack.pop();
+	}
+	cout<<endl;
+}
+
+int main()
+{
+	int decimal;
+	cout<<"enter the number in decimal"<<endl;
+	cin>>decimal;
+	if(decimal==0)
+	cout<<"Binary representation is 0"<<endl;
+	else
+	{
+		decimal_to_binary(decimal);
+	}
+	return 0;
+}
