@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int fact(int n)
+{
+	if(n==0)
+	return 1;
+	if(n==1)
+	return 1;
+	else
+	return n*fact(n-1);
+}
+
+int main()
+{
+	int num;
+	cout<<"enter the number whose factorial you want to know"<<endl;
+	cin>>num;
+	int factorial=fact(num);
+	cout<<"The factorial of the numebr is "<<factorial<<endl;
+	return 0;
+}
