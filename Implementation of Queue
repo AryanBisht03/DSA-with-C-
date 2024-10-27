@@ -1,0 +1,155 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Queue
+{
+	int max_size;
+	int *arr;
+	int front;
+	int rear;
+	
+	public:
+		Queue(int size)
+		{
+			max_size=size;
+			arr=new int[max_size];
+			front=-1;
+			rear=-1;
+		}
+	~Queue()
+	{
+		delete[] arr;
+	}
+	
+	bool is_full()
+	{
+	  return (rear==max_size-1);
+	}
+	
+	bool is_empty()
+	{
+		return (front==-1||front>rear);
+	}
+	
+	void enqueue(int element)
+	{
+		if(is_full())
+		{
+			cout<<"The queue is already full"<<endl;
+		}
+		else
+		{
+			if(front==-1)
+			front=0;
+			arr[++rear]=element;
+			cout<<element<<" enqued successfully"<<endl;
+		}
+	}
+	void dequeue()
+	{
+		if(is_empty())
+		{
+			cout<<"Queue is already empty"<<endl;
+		}
+		else
+		{
+			cout<<arr[front]<<" element is dequed"<<endl;
+		   front++;
+		   if(front>rear)
+		   front=rear=-1;
+		   
+		}
+	}
+	void get_frontpeak()
+	{
+		if(is_empty())
+		{
+			cout<<"There is no member in the queue"<<endl;
+		}
+		else
+		{
+			cout<<arr[front]<<" is the front peak element"<<endl;
+		}
+	}
+
+void get_rearpeak()
+{
+	if(is_empty())
+	{
+		cout<<"There is no member in  the queue"<<endl;
+	}
+	else
+	{
+		cout<<arr[rear]<<" is the rear peak"<<endl;
+	}
+}
+void display()
+{
+	if(is_empty())
+	{
+		cout<<"Queue is empty"<<endl;
+	}
+	else
+	{
+		for(int i=front;i<=rear;i++)
+		{
+			cout<<arr[i]<<" ";
+		}
+		cout<<endl;
+	}
+}
+};
+
+
+int main()
+{
+	int n;
+	cout<<"Enter the number of elements you want in your queue"<<endl;
+	cin>>n;
+	Queue queue(n);
+	int choice,element;
+	do
+	{
+	cout<<"-------------Menu--------------"<<endl;
+	cout<<"1. Enqueue"<<endl;
+	cout<<"2. Dequeue"<<endl;
+	cout<<"3. frontPeak"<<endl;
+	cout<<"4. RearPeak"<<endl;
+	cout<<"5. Display queue"<<endl;
+	cout<<"6. exit"<<endl;
+	cout<<"enter choice"<<endl;
+	cin>>choice;
+	switch(choice)
+	{
+		case 1:
+			cout<<"Enter the element you want to add"<<endl;
+			cin>>element;
+			queue.enqueue(element);
+			break;
+		
+		case 2:
+			queue.dequeue();
+			break;
+			
+		case 3:
+			queue.get_frontpeak();
+			break;
+			
+		case 4:
+			queue.get_rearpeak();
+			break;
+			
+		case 5:
+			queue.display();
+			break;
+			
+		case 6:
+			cout<<"Exiting"<<endl;
+			break;
+			
+		default:
+			cout<<"Invalid choice"<<endl;
+	}
+	}while(choice!=6);
+	return 0;
+}
